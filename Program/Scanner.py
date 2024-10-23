@@ -25,14 +25,14 @@ class Scanner:
         self.scanner = nmap.PortScanner()
 
 
-    def write_file(formated_result, output_file):
+    def write_file(self, formated_result, output_file):
         try:
             with open(output_file, 'a') as file:
                 file.write(formated_result)
         except Exception as e:
             print(f"Unexpected error: {e}")
 
-    def format_scan(output):
+    def format_scan(self, output):
             formated_result = json.dumps(output, indent=4)
             return formated_result
 
@@ -48,7 +48,7 @@ class Scanner:
             print(f"Unexpected error: {e}")
 
 
-    def Scan_file(self, file_name, output_file, flags):
+    def Scan_file(self, file_name, output_file, flags=None):
         print("Scanning...")
         hosts = self.read_file(file_name)
         for host in hosts:
@@ -64,14 +64,25 @@ class Scanner:
             self.write_file(formated_result, output_file)
         print(f"A file has been created with the given name: {output_file}")
 
-    def Scan_terminal():
-        print("Scanning...")    
+    def Scan_terminal(self, input, output_file, flags=None):
+        print("Scanning...")
+        try:
+            if flags == None:
+                self.scanner.scan(input)
+            else:
+                self.scanner.scan(input, flags)
+        except Exception as e:
+            print(f"An error occurred! {e}")
+        output = self.scanner[input]
+        formated_result = self.format_scan(output)
+        self.write_file(formated_result, output_file)
+        print(f"A file has been created with the given name: {output_file}")    
 
-    def Main(self, action, input, output_file, flags):
+    def Main(self, action, input, output_file, flags=None):
         if action == "File":
             self.Scan_file(input, output_file, flags)
-        elif action =="Terminal":
-            self.Scan_terminal()
+        elif action =="Terminal_input":
+            self.Scan_terminal(input, output_file, flags)
 
 
     

@@ -28,7 +28,7 @@ args = parser.parse_args()
 def Main():
     if args.command == "Scanner":
         scanner = Scanner()
-        scanner.Main(args.Input, args.Output_file, args.flags)
+        scanner.Main(args.Action, args.Input, args.Output_file, args.flags)
         print("Scanner")
     elif args.command == "Keygen":
         keygen = Keygen()
