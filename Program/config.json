@@ -1,0 +1,17 @@
+{
+    "default_cipher_key_file": "generated_key",
+    "default_output_file": "result.txt",
+    
+    "default_nmap_flags": null,
+
+    "enumeration_thread_option": 20,
+    
+    "enumeration_bruteforce_option": false,
+    "enumeration_silent_option": false,
+    "enumeration_verbose_option": false,
+    "enumeration_engine_option": null,
+    "enumeration_port_option": null
+
+
+
+}
