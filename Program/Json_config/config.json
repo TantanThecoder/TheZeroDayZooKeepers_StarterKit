@@ -1,0 +1,19 @@
+
+{
+    "default_output_file": "result.txt",
+
+    "default_nmap_flags": null,
+
+    "default_cipher_key_file": "generated_key.key",
+
+    "enumeration_thread_option": 20,
+    "enumeration_port_option": null,
+    "enumeration_silent_option": false,
+    "enumeration_verbose_option": false,
+    "enumeration_bruteforce_option": false,
+    "enumeration_engine_option": null,
+
+    "ssh_default_script": "SSH/SSH_Scripts/Example_script.txt",
+    "ssh_default_local_path": null,
+    "ssh_default_remote_path": null
+}

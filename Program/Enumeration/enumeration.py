@@ -4,19 +4,17 @@ except ImportError:
     logging.error("sublist3r library is not installed! Please run 'pip install sublist3r'.")
 import requests
 import logging
-import json
-from pathlib import Path
+from Validator.validator import Validator
+#from pathlib import Path
+from Json_config.json_config import Json_config
+import sys
 
+json_config = Json_config()
+config = json_config.load_config()
 
-def load_config():
-    file_path = "config.json"
-    try:
-        with open(file_path, 'r') as config_file:
-            return json.load(config_file)
-    except FileNotFoundError:
-        logging.error(f"The file config.json was not found!")
-
-config = load_config()
+if not config:
+    logging.error("Configuration file 'config.json' is missing or invalid. Please create it with default settings or check github for correct file!")
+    sys.exit("Exiting due to configuration error.")
 
 class Enumeration:
     def __init__(self) -> None:
@@ -25,12 +23,23 @@ class Enumeration:
     def Main(self, domain, thread, savefile):
         """
         Performs subdomain enumeration on a given domain and writes the result to a file.
-        Parameters:
-        - domain: Target domain to enumerate subdomains.
-        - thread: Number of threads for concurrent enumeration.
-        - savefile: Output file to store the results.
-        - ports: Optional port scanning (currently unused).
+        
+         Args:
+            - domain: Target domain to enumerate subdomains.
+            - thread: Number of threads for concurrent enumeration.
+            - savefile: Output file to store the results.
+            - ports: Optional port scanning (currently unused).
     """
+        while True:
+            if not Validator.validate_domain(domain):
+                logging.warning(f"Invalid domain name: {domain}")
+                domain = input("Input a new domain or type exit to terminate: ")
+                if domain.lower == 'exit':
+                    logging.warning("Terminating Program...")
+                    sys.exit(0)
+            else:
+                break
+
         subdomains = sublist3r.main(domain, thread, savefile, ports=config.get("enumeration_port_option"), silent= config.get("enumeration_silent_option"), verbose= config.get("enumeration_verbose_option"), enable_bruteforce= config.get("enumeration_bruteforce_option"), engines= config.get("enumeration_engine_option"))
 
         with open(savefile, 'w') as file:

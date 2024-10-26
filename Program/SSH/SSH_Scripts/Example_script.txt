@@ -1,0 +1,9 @@
+# This is a comment and will not be executed
+# only single line comments is possible, single line comments are ignored, made with #
+
+echo "Starting process..."
+ls -la /var/www
+df -h
+sudo systemctl restart apache2
+
+echo "Process complete!"
