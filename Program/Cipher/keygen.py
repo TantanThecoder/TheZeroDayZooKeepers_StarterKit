@@ -10,8 +10,8 @@ from Validator.validator import Validator
 
 class Keygen:
     def __init__(self):
-            self.path = Path.cwd() / "Cipher"
-            self.path.mkdir(parents=True, exist_ok=True)
+        self.path = Path.cwd() / "Cipher"
+        self.path.mkdir(parents=True, exist_ok=True)
 
     def Main(self, file_name):
         """
