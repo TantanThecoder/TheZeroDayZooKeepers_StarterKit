@@ -4,13 +4,14 @@ except ImportError:
     logging.error("Cryptography library missing! Please run 'pip install cryptography'")
 from pathlib import Path
 import logging
+from Validator.validator import Validator
 
 
 
 class Keygen:
     def __init__(self):
-        self.path = Path.cwd() / "Cipher"
-        self.path.mkdir(parents=True, exist_ok=True)
+            self.path = Path.cwd() / "Cipher"
+            self.path.mkdir(parents=True, exist_ok=True)
 
     def Main(self, file_name):
         """
@@ -18,9 +19,11 @@ class Keygen:
         If no file is specified, 'generated.key' is used as default.
         """
         key = Fernet.generate_key()
-
-        with open(self.path / file_name, "wb") as key_file:
-            key_file.write(key)
+        try:
+            with open(self.path / file_name, "wb") as key_file:
+                key_file.write(key)
+        except Exception as e:
+            logging.error(f"An unexcpected error occured: {e}")
 
         logging.info("A key has been saved!")
 
