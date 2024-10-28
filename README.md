@@ -200,12 +200,11 @@ python run.py scanner -h
 
 You can customize the `Enumeration` script using the following command-line options when running `run.py`.
 
-#### Command Format
+#### Command Format enumerate
 
 ```bash
 python run.py enumerate <domain> [-o <output_file>] [-t <threads>]
 ```
-
 1. Required Arguments
    - Domain: 
      The target domain for subdomain enumeration.
@@ -220,10 +219,74 @@ python run.py enumerate <domain> [-o <output_file>] [-t <threads>]
 
 ### Cryptography Commands
 
+#### Command Format cipher
+
+```bash
+python run.py cipher encrypt file test.txt [-o secret_message.enc] [-k generated_key.key]
+```
+1. **Required Arguments**
+   - Action:
+     Specify whether to Encrypt or Decrypt data. either enter 'Encrypt' or 'Decrypt'
+   - Data_type:
+     Indicate the source of data, either 'File' (input from a file) or 'Terminal_input' (input directly from the terminal).
+   - Input:
+     The path to the input file or the text you want to encrypt/decrypt. If file, make it a .txt
+2. **Optional Arguments**
+   - '-o' '--output_file':
+     Specify the name of the output file where the encrypted or decrypted data will be saved. Defaults to the value set in the configuration file if not provided.
+   - '-k' '--key'
+     Provide the path to the file containing the cryptographic key. If not specified, it defaults to generated.key as defined in the configuration file.
+
+## Command Format keygen
+
+```bash
+python run.py keygen [-k my_secret_key.key]
+```
+1. **Optional Arguments**
+   - '-k' '--key_file'
+     Name of the file you wish to store the key in, if not in use, default name will be given from option in config.json file.
+
 ### Nmap Scanner Commands
+
+#### Command Format scanner
+
+```bash
+python run.py scanner file <input> [-o result.txt] [-f "-sS -p 21"]
+```
+1. **Required Arguments**
+   - Action:
+     Specify the method of scanning, choose either 'file' or 'terminal_input'
+   - Input:
+     The file name containing host addresses (if file action) or the IP address/range (if terminal_input action).
+2. **Optional Arguments**
+   - '-o' '--output_file':
+     Specify the name of the output file where the scan results will be saved. If not provided, a default name will be given as defined in the configuration file.
+   - '-f' '--flags'
+     Add optional Nmap flags for advanced scanning options (e.g., -sS for SYN scan). Default flags can be set in configuration file. Input as quoted string.
 
 ### SSH Commands
 
+#### Command Format ssh
+
+```bash
+python run.py ssh script 127.0.0.1 debian test123 [-s my_script.txt] [-l <local_path>] [-r <remote_path>]
+```
+1. **Required Arguments**
+   - Action:
+     Choose between executing a 'script', 'upload' to upload a file or 'download' to download a file
+   - Ip:
+     The IP address of the SSH server you want to connect to.
+   - Username:
+     The username to log into the SSH server.
+   - Password:
+     Password for specified username.
+2. **Otional Arguments**
+   - '-s' '--script':
+     The path or name of the file containing the script to be executed (required if action is 'script', default script can be set in config.json).
+   - '-l' '--local_path':
+     The path on the local machine where the file will be saved or retrieved from.(Requierd if action is 'upload' or 'download', a default local_path can be set in config.json).
+   - '-r' '--remote_path':
+     The path on the SSH server where the file will be uploaded or downloaded from.(Requierd if action is 'upload' or 'download', a default remote_path can be set in config.json).
 
 
 
