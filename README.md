@@ -11,8 +11,11 @@
 6. [Usage](#usage)
    - [Running the Program with `run.py`](#running-the-program-with-runpy)
    - [Help Command](#help-command)
-   - [Port Scanning Example](#port-scanning-example)
-   - [SSH Upload/Download Example](#ssh-uploaddownload-example)
+   - [How `run.py` Works](#how-runpy-works)
+   - [Enumeration Commands](#enumeration-commands)
+   - [Cryptography Commands](#cryptography-commands)
+   - [Nmap Scanner Commands](#nmap-scanner-commands)
+   - [SSH Commands](#ssh-commands)
 7. [Logging](#logging)
 8. [Contributing](#contributing)
 9. [License](#license)
@@ -193,10 +196,13 @@ python run.py scanner -h
 7. **Exit Strategy**:
    - If any critical error occurs or if the user opts to terminate the program (by entering "exit" when prompted), the script will gracefully exit and log the necessary information.
 
-### Summary
+### Enumeration Commands
 
-The `run.py` file is a crucial component of the ZeroDayZooKeepers_Starterkit, streamlining the process of executing complex operations through a user-friendly command-line interface. By leveraging the functionalities of the various scripts within the program, it allows users to efficiently conduct security assessments, file transfers, and more—all from a single point of execution.
+### Cryptography Commands
 
+### Nmap Scanner Commands
+
+### SSH Commands
 
 
 
