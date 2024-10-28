@@ -1,5 +1,9 @@
 # ZeroDayZooKeepers_Starterkit
 
+## Introduction
+
+The ZeroDayZooKeepers is a schoolproject aimed to be a toolbox for etichal hackers and others in the cybersecurity buisness. It aims to automate certain tasks made regulary all runnable with one and the same script. !Disclaimer: This is a school project and may or may not be finished!
+
 ## Table of Contents
 1. [Introduction](#introduction)
 2. [Features](#features)
@@ -22,9 +26,6 @@
    - [Configuration of Logging](#configuration-of-logging)
 8. [Contributing](#contributing)
 
-## Introduction
-
-The ZeroDayZooKeepers is a schoolproject aimed to be a toolbox for etichal hackers and others in the cybersecurity buisness. It aims to automate certain tasks made regulary all runnable with one and the same script. !Disclaimer: This is a school project and may or may not be finished!
 
 ## Features
 
