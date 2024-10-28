@@ -31,11 +31,16 @@ The ZeroDayZooKeepers is a schoolproject aimed to be a toolbox for etichal hacke
 - **Logging**: Comprehensive logging of operations and errors for troubleshooting.
 
 ## Requirements
-- **Paramiko**
-- **Nmap**
-- **Sublist3r**
+- **Paramiko** for SSH connections and executing commands.
+- **Nmap** for flexible networkscanning.
+- **Sublist3r** for Subdomain enumeration
+- **Fernet Cryptography** for cipher key generation, encrypting and decrypting.
 - **Standard Python libraries:** json, logging, sys, pathlib
 
 ## Installation
-
+```python
+print("Hello, world!")
+for i in range(10):
+    print(i)
+```
 
