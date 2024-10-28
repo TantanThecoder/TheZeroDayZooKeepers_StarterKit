@@ -7,7 +7,7 @@
 4. [Installation](#installation)
 5. [Configuration](#configuration)
    - [Editing the Configurations](#editing-the-configuration)
-   - [Json_config Class](#json_config-class)
+   - [Configuration Parameters](#configuration-parameters)
 6. [Usage](#usage)
    - [Running Scripts](#running-scripts)
    - [Enumeration Example](#enumeration-example)
@@ -82,8 +82,6 @@ The options are as seen below:
 2. **Modify the parameters as needed.**
 3. **Save the file.**
 4. **Run the application to apply the new configuration.**
-
-### Configuration parameters
 
 ### Configuration Parameters
 
