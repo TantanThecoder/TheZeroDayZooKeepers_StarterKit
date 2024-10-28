@@ -24,9 +24,18 @@ The ZeroDayZooKeepers is a schoolproject aimed to be a toolbox for etichal hacke
 ## Features
 
 - **Subdomain Enumeration**: Identify subdomains of a target domain using multiple search engines.
-- **Port Scanning**: Scan IP addresses or ranges for open ports using Nmap.
+- **Port Scanning**: Make your desired scans with nmap!
 - **SSH Management**: Upload, download files, and execute scripts on remote servers over SSH.
+- **Cryptography**: A simple Cryptography tool that lets you both decrypt and encrypt using generated cipher keys.
 - **Configurable**: Easily adjustable settings through a JSON configuration file.
 - **Logging**: Comprehensive logging of operations and errors for troubleshooting.
+
+## Requirements
+- **Paramiko**
+- **Nmap**
+- **Sublist3r**
+- **Standard Python libraries**
+
+## Installation
 
 
