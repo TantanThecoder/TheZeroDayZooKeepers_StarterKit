@@ -10,7 +10,7 @@
    - [Configuration Parameters](#configuration-parameters)
 6. [Usage](#usage)
    - [Running the Program with `run.py`](#running-the-program-with-`run.py`)
-   - [Enumeration Example](#enumeration-example)
+   - [Help Command](#help-command)
    - [Port Scanning Example](#port-scanning-example)
    - [SSH Upload/Download Example](#ssh-uploaddownload-example)
 7. [Logging](#logging)
@@ -141,7 +141,7 @@ The options are as seen below:
 
 The `run.py` file serves as the main entry point for executing the various functionalities of the ZeroDayZooKeepers_Starterkit. It orchestrates the execution of other scripts in the program, allowing users to perform tasks such as subdomain enumeration, port scanning, SSH file transfers, and more—all from the terminal.
 
-### Help
+### Help Command
 
 Run the following commands for in teminal listing of options available.
 
