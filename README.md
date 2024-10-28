@@ -44,4 +44,8 @@ The ZeroDayZooKeepers is a schoolproject aimed to be a toolbox for etichal hacke
 git clone <repository-url>
 cd <repository-directory>
 ```
+2. Install requiered libraries:
+```bash
+pip install -r requirements.txt
+```
 
