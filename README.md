@@ -38,9 +38,10 @@ The ZeroDayZooKeepers is a schoolproject aimed to be a toolbox for etichal hacke
 - **Standard Python libraries:** json, logging, sys, pathlib
 
 ## Installation
-```python
-print("Hello, world!")
-for i in range(10):
-    print(i)
+
+1. Clone the repository:
+```bash
+git clone <repository-url>
+cd <repository-directory>
 ```
 
