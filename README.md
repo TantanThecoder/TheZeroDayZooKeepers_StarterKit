@@ -200,7 +200,7 @@ python run.py scanner -h
 
 ### Enumeration Commands
 
-You can customize the `Enumeration` script using the following command-line options when running `run.py`.
+The enumeration script is initiated by typing 'enumerate' after the ` python run.py ` command
 
 #### Command Format enumerate
 
@@ -220,6 +220,8 @@ python run.py enumerate example.com [-o result.txt] [-t 20]
    
 
 ### Cryptography Commands
+
+The Cryptography script is initiated by typing 'cipher' or 'keygen' after the ` python run.py ` command depending on which of the 2 you wanna run.
 
 #### Command Format cipher
 
@@ -250,6 +252,8 @@ python run.py keygen [-k my_secret_key.key]
 
 ### Nmap Scanner Commands
 
+The nmap scanning script is initiated by typing 'scanner' after the ` python run.py ` command
+
 #### Command Format scanner
 
 ```bash
@@ -269,6 +273,8 @@ python run.py scanner file <input> [-o result.txt] [-f "-sS -p 21"]
 ### SSH Commands
 
 #### Command Format ssh
+
+The ssh script is initiated by typing 'ssh' after the ` python run.py ` command
 
 ```bash
 python run.py ssh script 127.0.0.1 debian test123 [-s my_script.txt] [-l <local_path>] [-r <remote_path>]
