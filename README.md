@@ -141,17 +141,21 @@ The options are as seen below:
 
 The `run.py` file serves as the main entry point for executing the various functionalities of the ZeroDayZooKeepers_Starterkit. It orchestrates the execution of other scripts in the program, allowing users to perform tasks such as subdomain enumeration, port scanning, SSH file transfers, and more—all from the terminal.
 
-#### Help
+### Help
+
 Run the following commands for in teminal listing of options available.
+
 ```bash
 python run.py -h
 ```
-Following is a example when accessing help towrads one of the available scripts to run
+
+Following is a example when accessing help towrads one of the available scripts to run. The following command can be run specified for each script using the scripts given argparse Script name.
+
 ```bash
 python run.py scanner -h
 ```
 
-#### How `run.py` Works
+### How `run.py` Works
 
 1. **Initialization**:
    - When you run `run.py`, it initializes the necessary configurations by loading the `config.json` file. This file contains default settings for various operations, which can be modified according to user preferences.
@@ -178,9 +182,10 @@ python run.py scanner -h
 
 5. **Modular Implementation**:
    - The `run.py` script imports and utilizes various classes from the program:
-     - **`Enumeration`**: Handles the logic for subdomain enumeration and manages the integration of Sublist3r.
-     - **`Scanner`**: Manages the port scanning functionalities using Nmap.
-     - **`Ssh`**: Responsible for establishing SSH connections, transferring files, and executing scripts remotely.
+     - **`enumeration`**: Handles the logic for subdomain enumeration and manages the integration of Sublist3r.
+     - **`scanner`**: Manages the port scanning functionalities using Nmap.
+     - **`ssh`**: Responsible for establishing SSH connections, transferring files, and executing scripts remotely.
+     - **`cipher`**: Insaniating the options for encrypting and decrypting aswell as generating the key.
 
 6. **Error Handling**:
    - The script incorporates robust error handling to manage exceptions that may arise during execution, such as invalid input parameters, connection issues, or file access errors. This ensures that the user is informed of any issues and can take corrective action.
@@ -188,7 +193,7 @@ python run.py scanner -h
 7. **Exit Strategy**:
    - If any critical error occurs or if the user opts to terminate the program (by entering "exit" when prompted), the script will gracefully exit and log the necessary information.
 
-#### Summary
+### Summary
 
 The `run.py` file is a crucial component of the ZeroDayZooKeepers_Starterkit, streamlining the process of executing complex operations through a user-friendly command-line interface. By leveraging the functionalities of the various scripts within the program, it allows users to efficiently conduct security assessments, file transfers, and more—all from a single point of execution.
 
