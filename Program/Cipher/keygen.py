@@ -4,7 +4,6 @@ except ImportError:
     logging.error("Cryptography library missing! Please run 'pip install cryptography'")
 from pathlib import Path
 import logging
-from Validator.validator import Validator
 
 
 

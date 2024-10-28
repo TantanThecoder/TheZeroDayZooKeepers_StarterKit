@@ -52,15 +52,21 @@ class Cipher:
             - file_name: Output file to save the decrypted content.
             - data_type: Specifies whether input is from a file or terminal input.
         """
+        decrypted_text = None
+
         if data_type == "File":
             try:
                 with open(input, "rb") as encrypted_file:
-                    encrypterd_text = encrypted_file.read()
+                    encrypted_text = encrypted_file.read()
+                    if not encrypted_text:  # Check if the file is empty
+                        logging.error(f"The file {input} is empty.")
+                        return
                     #validate not none?
             except FileNotFoundError:
                 logging.error(f"Could not find the specified file: {input}. Please check the path and try again.")
+                return
             else:
-                decrypted_text = cipher_suite.decrypt(encrypterd_text)
+                decrypted_text = cipher_suite.decrypt(encrypted_text)
             
         else:
             message = input.encode()
@@ -68,8 +74,9 @@ class Cipher:
             #validate input not none?
         
         #validate filename?
-        with open(file_name, "wb") as decrypted_file:
-                    decrypted_file.write(decrypted_text)
+        if decrypted_text is not None:
+            with open(file_name, "wb") as decrypted_file:
+                decrypted_file.write(decrypted_text)
 
 
     def Main(self, action, data_type, input, file_name, key):
