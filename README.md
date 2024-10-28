@@ -19,7 +19,7 @@
 
 ## Introduction
 
-This project is a comprehensive tool designed for network enumeration and SSH management. It provides capabilities for subdomain enumeration, port scanning, and executing scripts remotely over SSH. The tool is modular, making it easy to extend and adapt to your specific networking needs.
+The ZeroDayZooKeepers is a schoolproject aimed to be a toolbox for etichal hackers and others in the cybersecurity buisness. It aims to automate certain tasks made regulary all runnable with one and the same script. !Disclaimer: This is a school project and may or may not be finished!
 
 ## Features
 
