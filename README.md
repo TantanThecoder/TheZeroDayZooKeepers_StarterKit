@@ -6,7 +6,7 @@
 3. [Requirements](#requirements)
 4. [Installation](#installation)
 5. [Configuration](#configuration)
-   - [Configuration File](#configuration-file)
+   - [Editing Configurations](#configuration-file)
    - [Json_config Class](#json_config-class)
 6. [Usage](#usage)
    - [Running Scripts](#running-scripts)
