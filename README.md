@@ -141,6 +141,16 @@ The options are as seen below:
 
 The `run.py` file serves as the main entry point for executing the various functionalities of the ZeroDayZooKeepers_Starterkit. It orchestrates the execution of other scripts in the program, allowing users to perform tasks such as subdomain enumeration, port scanning, SSH file transfers, and more—all from the terminal.
 
+#### Help
+Run the following commands for in teminal listing of options available.
+```bash
+python run.py -h
+```
+Following is a example when accessing help towrads one of the available scripts to run
+```bash
+python run.py scanner -h
+```
+
 #### How `run.py` Works
 
 1. **Initialization**:
