@@ -21,3 +21,12 @@
 
 This project is a comprehensive tool designed for network enumeration and SSH management. It provides capabilities for subdomain enumeration, port scanning, and executing scripts remotely over SSH. The tool is modular, making it easy to extend and adapt to your specific networking needs.
 
+## Features
+
+- **Subdomain Enumeration**: Identify subdomains of a target domain using multiple search engines.
+- **Port Scanning**: Scan IP addresses or ranges for open ports using Nmap.
+- **SSH Management**: Upload, download files, and execute scripts on remote servers over SSH.
+- **Configurable**: Easily adjustable settings through a JSON configuration file.
+- **Logging**: Comprehensive logging of operations and errors for troubleshooting.
+
+
