@@ -205,7 +205,7 @@ You can customize the `Enumeration` script using the following command-line opti
 #### Command Format enumerate
 
 ```bash
-python run.py enumerate <domain> [-o <output_file>] [-t <threads>]
+python run.py enumerate example.com [-o result.txt] [-t 20]
 ```
 1. Required Arguments
    - Domain: 
