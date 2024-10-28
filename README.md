@@ -48,4 +48,40 @@ cd <repository-directory>
 ```bash
 pip install -r requirements.txt
 ```
+3. Ensure that the config.json file i correctly setup for your needs! More about this in next chapter.
+
+## Configuration
+
+The project uses a json configuration file for certain default values. This is to ensure the user never have to enter the soruce code to set a new default value.
+
+The options are as seen below:
+
+```json
+
+{
+    "default_output_file": "result.txt",
+
+    "default_nmap_flags": null,
+
+    "default_cipher_key_file": "generated_key.key",
+
+    "enumeration_thread_option": 20,
+    "enumeration_port_option": null,
+    "enumeration_silent_option": false,
+    "enumeration_verbose_option": false,
+    "enumeration_bruteforce_option": false,
+    "enumeration_engine_option": null,
+
+    "ssh_default_script": "SSH/SSH_Scripts/Example_script.txt",
+    "ssh_default_local_path": null,
+    "ssh_default_remote_path": null
+}
+```
+### Editing the configuration
+1. **Open the config.json file in a text editor.**
+2. **Modify the parameters as needed.**
+3. **Save the file.**
+4. **Run the application to apply the new configuration.**
+
+
 
