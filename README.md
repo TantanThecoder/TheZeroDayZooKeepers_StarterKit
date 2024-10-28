@@ -17,6 +17,9 @@
    - [Nmap Scanner Commands](#nmap-scanner-commands)
    - [SSH Commands](#ssh-commands)
 7. [Logging](#logging)
+   - [Purpose of logging](#purpose-of-logging)
+   - [Logging levels](#logging-levels)
+   - [Configuration of Logging](#configuration-of-logging)
 8. [Contributing](#contributing)
 9. [License](#license)
 
@@ -288,5 +291,25 @@ python run.py ssh script 127.0.0.1 debian test123 [-s my_script.txt] [-l <local_
    - '-r' '--remote_path':
      The path on the SSH server where the file will be uploaded or downloaded from.(Requierd if action is 'upload' or 'download', a default remote_path can be set in config.json).
 
+## Logging
+
+The application uses the `logging` module to provide comprehensive logging capabilities, which helps in monitoring and debugging. 
+
+### Purpose of Logging
+
+Logging is an essential feature that allows you to track the application's behavior during execution. It captures important events, errors, and status messages, making it easier to diagnose issues and understand the flow of the application.
+
+### Logging Levels
+
+The following logging levels are used throughout the application:
+
+- **DEBUG**: Detailed information, typically of interest only when diagnosing problems. This level is used for low-level events.
+- **INFO**: Confirmation that things are working as expected. This level indicates the general operational status of the application.
+- **WARNING**: An indication that something unexpected happened, or indicative of some problem in the near future (e.g., ‘disk space low’). The application is still functioning as expected.
+- **ERROR**: Due to a more serious problem, the software has not been able to perform a specific operation.
+- **CRITICAL**: A very serious error, indicating that the program itself may be unable to continue running.
+
+### Configuration of Logging
+- **Yet to be impelemented, comming soon!
 
 
