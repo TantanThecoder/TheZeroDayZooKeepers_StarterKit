@@ -298,6 +298,8 @@ python run.py ssh script 127.0.0.1 debian test123 [-s my_script.txt] [-l <local_
    - '-r' '--remote_path':
      The path on the SSH server where the file will be uploaded or downloaded from.(Requierd if action is 'upload' or 'download', a default remote_path can be set in config.json).
 
+### SSH Scripts
+The program contains a folder where you can store your own scripts made specifically for the ssh portion for quick access. However make sure the scripts you make follow the rough guidelines given in the example script that is part of this project, located in the `SSH_Scripts`folder in the `SSH`folder.
 ## Logging
 
 The application uses the `logging` module to provide comprehensive logging capabilities, which helps in monitoring and debugging. 
