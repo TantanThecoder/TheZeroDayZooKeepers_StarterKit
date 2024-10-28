@@ -21,7 +21,6 @@
    - [Logging levels](#logging-levels)
    - [Configuration of Logging](#configuration-of-logging)
 8. [Contributing](#contributing)
-9. [License](#license)
 
 ## Introduction
 
@@ -311,5 +310,9 @@ The following logging levels are used throughout the application:
 
 ### Configuration of Logging
 - **Yet to be impelemented, comming soon!
+
+## Contributing
+- ** Guide yet to be implemented **
+
 
 
