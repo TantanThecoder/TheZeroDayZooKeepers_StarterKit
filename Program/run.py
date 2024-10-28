@@ -24,7 +24,7 @@ parser.add_argument('-v','--version', action='version', version=f'ZeroDayZooKeep
 subparser = parser.add_subparsers(title="Options", dest="script", help="Select what script to run!")
 
 parser_scanner = subparser.add_parser("scanner", help="Scan hosts for open ports and services.")
-parser_scanner.add_argument("action", choices=["File", "Terminal_input"], help="Specify the source of hosts to scan: 'File' for a file containing host addresses or 'Terminal_input' for manual entry.")
+parser_scanner.add_argument("action", choices=["file", "terminal_input"], help="Specify the source of hosts to scan: 'File' for a file containing host addresses or 'Terminal_input' for manual entry.")
 parser_scanner.add_argument("input", help="The file name containing host addresses (if Action is 'File') or the host IP address (if Action is 'Terminal_input').")
 parser_scanner.add_argument("-o","--output_file", help="The name of the file where the scan results will be saved. A default name will be given if this flag is not in use!", default=json_get.get("default_output_file"))
 parser_scanner.add_argument("-f", "--flags", help="Optional: Add desired flags for the Nmap scan (e.g., '-sS' for SYN scan).", default=json_get.get("default_nmap_flags"))
@@ -33,8 +33,8 @@ parser_key = subparser.add_parser("keygen", help="Generate a Cipher key to use f
 parser_key.add_argument("-k", "--key_file", help="Enter the name of the file to store the key in! If not entered a defult name will be given!", default=json_get.get("default_cipher_key_file"))
 
 parser_cipher = subparser.add_parser("cipher", help="Encrypt or Decrypt a file or input text")
-parser_cipher.add_argument("action", choices=["Decrypt", "Encrypt"], help="Choose wether to use encrypt or decrypt")
-parser_cipher.add_argument("data_type", choices=["File", "Terminal_input"], help="Choose wether to encrypt text from a file or direct input to terminal!")
+parser_cipher.add_argument("action", choices=["decrypt", "encrypt"], help="Choose wether to use encrypt or decrypt")
+parser_cipher.add_argument("data_type", choices=["file", "terminal_input"], help="Choose wether to encrypt text from a file or direct input to terminal!")
 parser_cipher.add_argument("input", help="The file name containing message to be ciphered (if Action is 'File') or direct input (if Action is 'Terminal_input').")
 parser_cipher.add_argument("-o","--output_file", help="The name of the file where the ciphered message is stored.", default=json_get.get("default_output_file"))
 parser_cipher.add_argument("-k", "--key", help="Enter the name of the file containing the cryptography key, if default key name is in use, this option becomes optional.", default=json_get.get("default_cipher_key_file"))

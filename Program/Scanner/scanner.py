@@ -128,9 +128,9 @@ class Scanner:
         logging.info(f"A file has been created with the given name: {output_file}")    
 
     def Main(self, action, input, output_file, flags=None):
-        if action == "File":
+        if action == "file":
             self.Scan_file(input, output_file, flags)
-        elif action =="Terminal_input":
+        elif action =="terminal_input":
             self.Scan_terminal(input, output_file, flags)
 
 

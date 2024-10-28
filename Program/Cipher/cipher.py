@@ -98,9 +98,9 @@ class Cipher:
         else:
             cipher_suite = Fernet(cipher_key)
 
-        if action == "Decrypt":
+        if action == "decrypt":
             self.Decrypt(cipher_suite, input, file_name, data_type)
 
-        elif action == "Encrypt":
+        elif action == "encrypt":
             self.Encrypt(cipher_suite, input, file_name, data_type)
 
