@@ -9,7 +9,7 @@
    - [Editing the Configurations](#editing-the-configuration)
    - [Configuration Parameters](#configuration-parameters)
 6. [Usage](#usage)
-   - [Running Scripts](#running-scripts)
+   - [Running the Program with `run.py`](#running-the-program-with-`run.py`)
    - [Enumeration Example](#enumeration-example)
    - [Port Scanning Example](#port-scanning-example)
    - [SSH Upload/Download Example](#ssh-uploaddownload-example)
