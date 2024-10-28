@@ -56,6 +56,8 @@ The project uses a json configuration file for certain default values. This is t
 
 The options are as seen below:
 
+!Disclamer: Most of the setable options are only sent in during runtime if optional choices are not sent in via argparse. 
+
 ```json
 
 {
@@ -132,6 +134,54 @@ The options are as seen below:
 12. **ssh_default_remote_path**: 
     - **Type**: String or null
     - **Description**: The default remote path from which files will be downloaded via SSH. Set to null if you want to specify the path at runtime.
+   
+## Usage
+
+### Running the Program with `run.py`
+
+The `run.py` file serves as the main entry point for executing the various functionalities of the ZeroDayZooKeepers_Starterkit. It orchestrates the execution of other scripts in the program, allowing users to perform tasks such as subdomain enumeration, port scanning, SSH file transfers, and more—all from the terminal.
+
+#### How `run.py` Works
+
+1. **Initialization**:
+   - When you run `run.py`, it initializes the necessary configurations by loading the `config.json` file. This file contains default settings for various operations, which can be modified according to user preferences.
+
+2. **Command-Line Interface**:
+   - The script uses Python's built-in `argparse` module to create a command-line interface. This allows users to specify actions, parameters, and options when running the script from the terminal.
+
+3. **Action Selection**:
+   - Users can choose from various actions, such as:
+     - **Enumeration**: Initiating subdomain enumeration using the Sublist3r tool.
+     - **Scanning**: Performing port scans using Nmap.
+     - **SSH Operations**: Uploading or downloading files, or executing scripts on remote servers via SSH.
+
+4. **Example of Running the Program**:
+   - To start the program, you would typically run the following command in the terminal:
+     ```bash
+     python run.py --action enumeration --domain example.com --threads 20 --output result.txt
+     ```
+   - In this example:
+     - `--action` specifies the action to perform (in this case, enumeration).
+     - `--domain` specifies the target domain for enumeration.
+     - `--threads` sets the number of concurrent threads to use during the operation.
+     - `--output` determines the name of the output file where results will be saved.
+
+5. **Modular Implementation**:
+   - The `run.py` script imports and utilizes various classes from the program:
+     - **`Enumeration`**: Handles the logic for subdomain enumeration and manages the integration of Sublist3r.
+     - **`Scanner`**: Manages the port scanning functionalities using Nmap.
+     - **`Ssh`**: Responsible for establishing SSH connections, transferring files, and executing scripts remotely.
+
+6. **Error Handling**:
+   - The script incorporates robust error handling to manage exceptions that may arise during execution, such as invalid input parameters, connection issues, or file access errors. This ensures that the user is informed of any issues and can take corrective action.
+
+7. **Exit Strategy**:
+   - If any critical error occurs or if the user opts to terminate the program (by entering "exit" when prompted), the script will gracefully exit and log the necessary information.
+
+#### Summary
+
+The `run.py` file is a crucial component of the ZeroDayZooKeepers_Starterkit, streamlining the process of executing complex operations through a user-friendly command-line interface. By leveraging the functionalities of the various scripts within the program, it allows users to efficiently conduct security assessments, file transfers, and more—all from a single point of execution.
+
 
 
 
