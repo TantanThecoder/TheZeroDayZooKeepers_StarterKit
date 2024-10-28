@@ -207,14 +207,14 @@ python run.py enumerate <domain> [-o <output_file>] [-t <threads>]
 ```
 
 1. Required Arguments
-   - Domain:
+   - Domain: 
      The target domain for subdomain enumeration.
      
 2. Optional Arguments
-   - '-o' '--output_file'
+   - '-o' '--output_file': 
      Name of the output file for results. Defaults to the value in the config file.
 
-   - '-t' '--thread'
+   - '-t' '--thread': 
      Number of threads for concurrent enumeration. Defaults to 20, default changeable in config.json
    
 
