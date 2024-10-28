@@ -237,7 +237,7 @@ python run.py cipher encrypt file test.txt [-o secret_message.enc] [-k generated
    - '-k' '--key'
      Provide the path to the file containing the cryptographic key. If not specified, it defaults to generated.key as defined in the configuration file.
 
-## Command Format keygen
+#### Command Format keygen
 
 ```bash
 python run.py keygen [-k my_secret_key.key]
