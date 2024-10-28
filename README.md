@@ -34,7 +34,7 @@ The ZeroDayZooKeepers is a schoolproject aimed to be a toolbox for etichal hacke
 - **Paramiko**
 - **Nmap**
 - **Sublist3r**
-- **Standard Python libraries**
+- **Standard Python libraries:** json, logging, sys, pathlib
 
 ## Installation
 
