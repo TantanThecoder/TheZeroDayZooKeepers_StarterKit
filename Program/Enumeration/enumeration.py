@@ -4,9 +4,9 @@ except ImportError:
     logging.error("sublist3r library is not installed! Please run 'pip install sublist3r'.")
 import requests
 import logging
-from Validator.validator import Validator
+from Program.Validator.validator import Validator
 #from pathlib import Path
-from Json_config.json_config import Json_config
+from Program.Json_config.json_config import Json_config
 import sys
 
 json_config = Json_config()
