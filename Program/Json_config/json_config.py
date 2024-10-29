@@ -5,6 +5,7 @@ from pathlib import Path
 class Json_config:
 
     def __init__(self, config=None):
+        self.path = Path.cwd() / "Json_config"
         self.config = config if config else self.load_config()
  
     def load_config(self):
@@ -13,7 +14,7 @@ class Json_config:
         easy access to the varaiables in the config file.
         """
         try:
-            with open('config.json', 'r') as config_file:
+            with open(self.path / 'config.json', 'r') as config_file:
                 return json.load(config_file)
         except FileNotFoundError:
             logging.error("Configuration file 'config.json' not found.")

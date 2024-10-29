@@ -5,7 +5,7 @@ except ImportError:
 import json
 import logging
 import sys
-from Program.Validator.validator import Validator
+from Validator.validator import Validator
 
 
 class Scanner:

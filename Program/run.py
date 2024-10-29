@@ -49,9 +49,9 @@ parser_ssh.add_argument("action", choices=["script", "upload", "download"], help
 parser_ssh.add_argument("ip", help="The ip adress for the ssh server.")
 parser_ssh.add_argument("username", help="The login username for the requested ssh server")
 parser_ssh.add_argument("password", help="The login password for the requested ssh server")
-parser_ssh.add_argument("-s", "--script", help="The path or name of the file containing the script to be executed (required if action is 'script', default script can be set in config.json).", default=json_config.raw_to_universal_path(json_get.get("ssh_default_script")))
-parser_ssh.add_argument("-l", "--local_path", help= "The path on the local machine where the file will be saved or retrieved from.(Requierd if action is 'upload' or 'download', a default local_path can be set in config.json)", default=json_config.raw_to_universal_path(json_get.get("ssh_default_local_path")))
-parser_ssh.add_argument("-r", "--remote_path", help= "The path on the SSH server where the file will be uploaded or downloaded from.(Requierd if action is 'upload' or 'download', a default remote_path can be set in config.json)", default=json_config.raw_to_universal_path(json_get.get("ssh_default_remote_path")))
+parser_ssh.add_argument("-s", "--script", help="The path or name of the file containing the script to be executed (required if action is 'script', default script can be set in config.json).", default=json_get.get("ssh_default_script"))
+parser_ssh.add_argument("-l", "--local_path", help= "The path on the local machine where the file will be saved or retrieved from.(Requierd if action is 'upload' or 'download', a default local_path can be set in config.json)", default=json_get.get("ssh_default_local_path"))
+parser_ssh.add_argument("-r", "--remote_path", help= "The path on the SSH server where the file will be uploaded or downloaded from.(Requierd if action is 'upload' or 'download', a default remote_path can be set in config.json)", default=json_get.get("ssh_default_remote_path"))
 
 args = parser.parse_args()
 
