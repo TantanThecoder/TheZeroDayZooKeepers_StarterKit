@@ -2,6 +2,8 @@ import logging
 import json
 from pathlib import Path
 
+logging.basicConfig(level=logging.INFO)
+
 class Json_config:
 
     def __init__(self, config=None):

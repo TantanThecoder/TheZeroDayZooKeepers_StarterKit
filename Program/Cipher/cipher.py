@@ -5,6 +5,8 @@ except ImportError:
 import logging
 from pathlib import Path
 
+logging.basicConfig(level=logging.INFO)
+
 class Cipher:
     def __init__(self):
         self.path = Path.cwd() / "Cipher" / "Cipher_files"

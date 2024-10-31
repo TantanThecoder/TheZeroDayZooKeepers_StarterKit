@@ -1,8 +1,10 @@
 import paramiko
+import paramiko.ssh_exception
 import logging
 from Validator.validator import Validator
 import sys
 
+logging.basicConfig(level=logging.INFO)
 class Ssh:
 
     def __init__(self, ssh=None):
@@ -60,9 +62,11 @@ class Ssh:
             - user (str): The username to log in to the SSH server.
             - password (str): The password for the chosen username.
         """
+        print("stop4")
         try:
             self.ssh.connect(ip, username=user, password=password)
             logging.info(f"We have a connection to {user}@{ip}")
+            print(f"We have a connection to {user}@{ip}")
         except paramiko.AuthenticationException:
             logging.error("Failed to authenticate!")
 
@@ -125,9 +129,11 @@ class Ssh:
             - password: The password for the choosen username.
             - script: The path or name of the file containing the script.
         """
+        print("stop3")
         try:
             self.ssh_connect(ip, user, password)
             formated_script = self.ssh_script_file_unpack(script)
+            print(formated_script)
             logging.info("Executing script")
 
             for command in formated_script:
@@ -204,6 +210,7 @@ class Ssh:
         valid_ip = self.ssh_validate_ip(ip)
 
         if action == "script":
+            print("stop2")
             self.ssh_script(valid_ip, username, password, script)
         elif action == "upload":
             if not Validator.validate_non_empty(local_path) or not Validator.validate_non_empty(remote_path):

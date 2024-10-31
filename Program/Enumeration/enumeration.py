@@ -8,6 +8,8 @@ from Validator.validator import Validator
 from Json_config.json_config import Json_config
 import sys
 
+logging.basicConfig(level=logging.INFO)
+
 json_config = Json_config()
 config = json_config.load_config()
 

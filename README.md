@@ -225,6 +225,7 @@ python run.py enumerate example.com [-o result.txt] [-t 20]
 ### Cryptography Commands
 
 The Cryptography script is initiated by typing 'cipher' or 'keygen' after the ` python run.py ` command depending on which of the 2 you wanna run.
+The cipher module assumes by default that the file to be decryted or encrypted lies in the same folder as the 'cipher.py' file.!
 
 #### Command Format cipher
 
@@ -292,7 +293,7 @@ python run.py ssh script 127.0.0.1 debian test123 [-s my_script.txt] [-l <local_
    - Password:
      Password for specified username.
 2. **Otional Arguments**
-   - '-s' '--script':
+   - '-s' '--script_file':
      The path or name of the file containing the script to be executed (required if action is 'script', default script can be set in config.json).
    - '-l' '--local_path':
      The path on the local machine where the file will be saved or retrieved from.(Requierd if action is 'upload' or 'download', a default local_path can be set in config.json).

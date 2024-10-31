@@ -7,6 +7,7 @@ import logging
 import sys
 from Validator.validator import Validator
 
+logging.basicConfig(level=logging.INFO)
 
 class Scanner:
     def __init__(self, port_scanner=None):
@@ -78,14 +79,17 @@ class Scanner:
         for host in hosts:
             if not Validator.validate_ip(host):
                 logging.warning(f"Invalid IP adress: {host}, skipping scan and continuing to next host!")
+                print((f"Invalid IP adress: {host}, skipping scan and continuing to next host!"))
                 continue
             try:
                 if flags == None:
                     logging.info(f"Started scan for host: {host}")
+                    print(f"Starting scan for host: {host}, with flags: {flags}")
                     self.scanner.scan(host) 
                 else:
                     logging.info(f"Starting scan for host: {host}, with flags: {flags}")
-                    self.scanner.scan(host, flags)
+                    print(f"Starting scan for host: {host}, with flags: {flags}")
+                    self.scanner.scan(host, arguments=flags)
             except nmap.PortScannerError as e:
                 logging.error(f"An Nmap error occured: {e}")
             except Exception as e:
@@ -111,10 +115,7 @@ class Scanner:
         logging.info("Scanning...")
         while True:
             if not Validator.validate_ip(host):
-                host = input(f"Invalid ip adress: {host}, please enter a new ip adress or type exit to terminate:")
-                if host.lower() == 'exit':
-                    logging.warning("Terminating program!")
-                    sys.exit(0)
+                host = input(f"Invalid ip adress: {host}, please enter a new ip adress:")
             else:
                 break
         try:
@@ -123,7 +124,7 @@ class Scanner:
                 self.scanner.scan(host)
             else:
                 logging.info(f"Starting scan for host: {host}, with flags: {flags}")
-                self.scanner.scan(host, flags)
+                self.scanner.scan(host, arguments=flags)
         except Exception as e:
             logging.error(f"An error occurred! {e}")
 
