@@ -25,10 +25,7 @@ class Ssh:
         while True:
             if not Validator.validate_ip(ip):
                 logging.error(f"Invalid ip adress, double check and try again: {ip}")
-                ip = input("Enter the ip adress again or type exit to exit the script")
-                if ip.lower == "exit":
-                    logging.info("Exiting program!")
-                    sys.exit(0)
+                ip = input("Enter the ip adress again:")
             else:
                 break
         return ip
