@@ -77,6 +77,7 @@ class Ssh:
         """
         try:
             sftp = self.ssh.open_sftp()
+            logging.info("We have a sftp connection.")
 
             if action == "upload":
                 sftp.put(local_path, remote_path)
@@ -127,9 +128,10 @@ class Ssh:
         try:
             self.ssh_connect(ip, user, password)
             formated_script = self.ssh_script_file_unpack(script)
+            logging.info("Executing script")
 
             for command in formated_script:
-                if command.startswith("#") or not command:  # Skip comments and empty lines
+                if command.startswith("#") or not command:
                     continue
             
                 stdin, stdout, stderr = self.ssh.exec_command(formated_script)
@@ -204,9 +206,17 @@ class Ssh:
         if action == "script":
             self.ssh_script(valid_ip, username, password, script)
         elif action == "upload":
+            if not Validator.validate_non_empty(local_path) or not Validator.validate_non_empty(remote_path):
+                logging.warning("Invalid Path, exiting program!")
+                sys.exit(0)
             self.ssh_upload(valid_ip, username, password, local_path, remote_path)
         elif action == "download":
+            if not Validator.validate_non_empty(local_path) or not Validator.validate_non_empty(remote_path):
+                logging.warning("Invalid Path, exiting program!")
+                sys.exit(0)
             self.ssh_download(valid_ip, username, password, local_path, remote_path)
+
+
 
 
 

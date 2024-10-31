@@ -81,13 +81,17 @@ class Scanner:
                 continue
             try:
                 if flags == None:
-                    self.scanner.scan(host)
+                    logging.info(f"Started scan for host: {host}")
+                    self.scanner.scan(host) 
                 else:
+                    logging.info(f"Starting scan for host: {host}, with flags: {flags}")
                     self.scanner.scan(host, flags)
             except nmap.PortScannerError as e:
                 logging.error(f"An Nmap error occured: {e}")
             except Exception as e:
                 logging.error(f"An error occurred! {e}")
+            else:
+                logging.info(f"Scan for host: {host}, sucessful!")
 
             output = self.scanner[host]
             formated_result = self.format_scan(output)
@@ -115,8 +119,10 @@ class Scanner:
                 break
         try:
             if flags == None:
+                logging.info(f"Starting scan for host: {host}")
                 self.scanner.scan(host)
             else:
+                logging.info(f"Starting scan for host: {host}, with flags: {flags}")
                 self.scanner.scan(host, flags)
         except Exception as e:
             logging.error(f"An error occurred! {e}")

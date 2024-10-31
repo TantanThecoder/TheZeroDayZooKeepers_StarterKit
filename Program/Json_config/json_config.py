@@ -32,4 +32,6 @@ class Json_config:
          Returns:
             - Universal Path: A modified version of the inputed path that works any os.
          """
-        return Path(self.config.get(raw_path))
+        if raw_path == None:
+            return None
+        return Path(raw_path)

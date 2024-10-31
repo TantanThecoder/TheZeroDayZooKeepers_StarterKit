@@ -5,7 +5,6 @@ except ImportError:
 import requests
 import logging
 from Validator.validator import Validator
-#from pathlib import Path
 from Json_config.json_config import Json_config
 import sys
 

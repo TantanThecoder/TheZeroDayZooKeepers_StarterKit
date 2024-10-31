@@ -5,6 +5,7 @@ from Scanner.scanner import Scanner
 from Enumeration.enumeration import Enumeration
 from SSH.ssh import Ssh
 from Json_config.json_config import Json_config
+from pathlib import Path
 import logging
 import sys
 
@@ -19,7 +20,7 @@ if not json_get:
 
 
 parser = argparse.ArgumentParser(description="A hacker's tool with multiple scripts for various tasks.")
-parser.add_argument('-v','--version', action='version', version=f'ZeroDayZooKeepers {VERSION}')
+parser.add_argument('-v','--version', action='version', version=f'ZeroDayZooKeepers -v: {VERSION}')
 
 subparser = parser.add_subparsers(title="Options", dest="script", help="Select what script to run!")
 
@@ -49,26 +50,31 @@ parser_ssh.add_argument("action", choices=["script", "upload", "download"], help
 parser_ssh.add_argument("ip", help="The ip adress for the ssh server.")
 parser_ssh.add_argument("username", help="The login username for the requested ssh server")
 parser_ssh.add_argument("password", help="The login password for the requested ssh server")
-parser_ssh.add_argument("-s", "--script", help="The path or name of the file containing the script to be executed (required if action is 'script', default script can be set in config.json).", default=json_get.get("ssh_default_script"))
-parser_ssh.add_argument("-l", "--local_path", help= "The path on the local machine where the file will be saved or retrieved from.(Requierd if action is 'upload' or 'download', a default local_path can be set in config.json)", default=json_get.get("ssh_default_local_path"))
-parser_ssh.add_argument("-r", "--remote_path", help= "The path on the SSH server where the file will be uploaded or downloaded from.(Requierd if action is 'upload' or 'download', a default remote_path can be set in config.json)", default=json_get.get("ssh_default_remote_path"))
+parser_ssh.add_argument("-s", "--script", help="The path or name of the file containing the script to be executed (required if action is 'script', default script can be set in config.json).", default=json_config.raw_to_universal_path(json_get.get("ssh_default_script")))
+parser_ssh.add_argument("-l", "--local_path", help= "The path on the local machine where the file will be saved or retrieved from.(Requierd if action is 'upload' or 'download', a default local_path can be set in config.json)", default=json_config.raw_to_universal_path(json_get.get("ssh_default_local_path")))
+parser_ssh.add_argument("-r", "--remote_path", help= "The path on the SSH server where the file will be uploaded or downloaded from.(Requierd if action is 'upload' or 'download', a default remote_path can be set in config.json)", default=json_config.raw_to_universal_path(json_get.get("ssh_default_remote_path")))
 
 args = parser.parse_args()
 
 def Main():
     if args.script == "scanner":
+        logging.info("Starting scanner.")
         scanner = Scanner()
         scanner.Main(args.action, args.input, args.output_file, args.flags)
     elif args.script == "keygen":
+        logging.info("Starting the key generator.")
         keygen = Keygen()
         keygen.Main(args.key_file)
     elif args.script == "cipher":
+        logging.info("Starting Cipher engines.")
         cipher = Cipher()
         cipher.Main(args.action, args.data_type, args.input, args.output_file, args.key)
     elif args.script == "enumerate":
+        logging.info("Enuerator online")
         enumeration = Enumeration()
         enumeration.Main(args.domain, args.thread, args.output_file)
     elif args.script == 'ssh':
+        logging.info("Ssh machine setting up.")
         ssh = Ssh()
         ssh.Main(args.action, args.ip, args.username, args.password, args.script, args.local_path, args.remote_path)
 

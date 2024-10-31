@@ -3,9 +3,11 @@ try:
 except ImportError:
     logging.error("Cryptography library missing! Please run 'pip install cryptography'")
 import logging
+from pathlib import Path
 
 class Cipher:
-    def __init__(self) -> None:
+    def __init__(self):
+        self.path = Path.cwd() / "Cipher" / "Cipher_files"
         pass
 
     def Encrypt(self, cipher_suite, input, file_name, data_type):
@@ -18,9 +20,9 @@ class Cipher:
             - file_name: Output file to save the encrypted content.
             - data_type: Specifies whether input is from a file or terminal input.
         """
-        if data_type == "File":
+        if data_type == "file":
             try:
-                with open(input, "rb") as text_file:
+                with open( self.path / input, "rb") as text_file:
                     message = text_file.read()
                     cipher_text = cipher_suite.encrypt(message)
                     #validate message or cipher text == none
@@ -34,11 +36,11 @@ class Cipher:
             #validate message or cipher text == none
 
         if ".enc" in file_name:
-            with open(file_name, "wb") as encrypt_file:
+            with open(self.path / file_name, "wb") as encrypt_file:
                 encrypt_file.write(cipher_text)
         else:
             edited_file_name = file_name + ".enc"
-            with open(edited_file_name, "wb") as encrypt_file:
+            with open(self.path / edited_file_name, "wb") as encrypt_file:
                 encrypt_file.write(cipher_text)
             #More comprehensive test for certain file types. Does it matter what type of file it is?
 
@@ -54,9 +56,9 @@ class Cipher:
         """
         decrypted_text = None
 
-        if data_type == "File":
+        if data_type == "file":
             try:
-                with open(input, "rb") as encrypted_file:
+                with open(self.path / input, "rb") as encrypted_file:
                     encrypted_text = encrypted_file.read()
                     if not encrypted_text:  # Check if the file is empty
                         logging.error(f"The file {input} is empty.")
@@ -75,7 +77,7 @@ class Cipher:
         
         #validate filename?
         if decrypted_text is not None:
-            with open(file_name, "wb") as decrypted_file:
+            with open(self.path / file_name, "wb") as decrypted_file:
                 decrypted_file.write(decrypted_text)
 
 
@@ -91,7 +93,7 @@ class Cipher:
             - key: The cryptographic key used for encryption/decryption.
         """
         try:
-            with open(key, "rb") as key_file:
+            with open(self.path / key, "rb") as key_file:
                 cipher_key = key_file.read()
         except FileNotFoundError:
             logging.error(f"Could not find the specified file: {key}. Please check the path and try again.")

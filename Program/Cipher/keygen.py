@@ -9,7 +9,7 @@ import logging
 
 class Keygen:
     def __init__(self):
-        self.path = Path.cwd() / "Cipher"
+        self.path = Path.cwd() / "Cipher" / "Cipher_files"
         self.path.mkdir(parents=True, exist_ok=True)
 
     def Main(self, file_name):
