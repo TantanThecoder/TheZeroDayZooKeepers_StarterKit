@@ -32,12 +32,12 @@ class Enumeration:
         while True:
             if not Validator.validate_domain(domain):
                 logging.warning(f"Invalid domain name: {domain}")
-                domain = input("Input a new domain or type exit to terminate: ")
-                if domain.lower == 'exit':
-                    logging.warning("Terminating Program...")
-                    sys.exit(0)
+                domain = input("Input a new domain: ")
             else:
                 break
+
+            
+
 
         subdomains = sublist3r.main(domain, thread, savefile, ports=config.get("enumeration_port_option"), silent= config.get("enumeration_silent_option"), verbose= config.get("enumeration_verbose_option"), enable_bruteforce= config.get("enumeration_bruteforce_option"), engines= config.get("enumeration_engine_option"))
 
