@@ -47,8 +47,7 @@ The ZeroDayZooKeepers is a schoolproject aimed to be a toolbox for etichal hacke
 
 1. Clone the repository:
 ```bash
-git clone <repository-url>
-cd <repository-directory>
+git clone https://github.com/TantanThecoder/TheZeroDayZooKeepers_StarterKit.git
 ```
 2. Install requiered libraries:
 ```bash
