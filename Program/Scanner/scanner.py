@@ -7,6 +7,7 @@ import logging
 from pathlib import Path
 from Validator.validator import Validator
 from Json_config.json_config import Json_config
+import sys
 
 json_config = Json_config()
 json_get = json_config.load_config()
@@ -76,10 +77,13 @@ class Scanner:
                     return hosts
             except FileNotFoundError:
                 logging.error(f" Could not find the specified file: {file_name}. Please check the path and try again.\n")
+                sys.exit("Terminating program as it cant proceed!")
             except PermissionError as e:
                 logging.error(f" Permission denied: {e}\n")
+                sys.exit("Terminating program as it cant proceed!")
             except Exception as e:
                 logging.error(f" Unexpected error: {e}\n")
+                sys.exit("Terminating program as it cant proceed!")
         else: 
             try:
                 logging.info(f" Reading file: {file_name}\n")
@@ -88,11 +92,13 @@ class Scanner:
                     return hosts
             except FileNotFoundError:
                 logging.error(f" Could not find the specified file: {file_name}. Please check the path and try again.\n")
+                sys.exit("Terminating program as it cant proceed!")
             except PermissionError as e:
                 logging.error(f" Permission denied: {e}\n")
+                sys.exit("Terminating program as it cant proceed!")
             except Exception as e:
                 logging.error(f" Unexpected error: {e}\n")
-
+                sys.exit("Terminating program as it cant proceed!")
 
     def Scan_file(self, file_name, output_file, flags=None):
         """
@@ -106,7 +112,7 @@ class Scanner:
         hosts = self.read_file(file_name)
         for host in hosts:
             if not Validator.validate_ip(host):
-                logging.warning(f"Invalid IP adress: {host}, skipping scan and continuing to next host!\n")
+                logging.warning(f" Skipping scan for {host} and continuing to next host!\n")
                 continue
             try:
                 if flags == None:
@@ -120,11 +126,18 @@ class Scanner:
             except Exception as e:
                 logging.error(f" An error occurred! {e}\n")
             else:
-                logging.info(f" Scan for host: {host}, sucessful!\n")
+                if host in self.scanner.all_hosts():
+                    output = self.scanner[host]
+                # Check if the host is up before formatting and writing
+                    if self.scanner[host].state() == "up":
+                        logging.info(f"Scan for host: {host}, successful!\n")
+                        formatted_result = self.format_scan(output)
+                        self.write_file(formatted_result, output_file)
+                    else:
+                        logging.info(f"Host {host} is down, skipping writing results.\n")
+                else:
+                    logging.info(f"Host {host} was not found in scan results, skipping.\n")
 
-            output = self.scanner[host]
-            formated_result = self.format_scan(output)
-            self.write_file(formated_result, output_file)
 
         logging.info(f" A file has been created with the given name: {output_file}")
 
@@ -140,9 +153,11 @@ class Scanner:
         
         while True:
             if not Validator.validate_ip(host):
-                host = input(f"Invalid ip adress: {host}, please enter a new ip adress:")
+                host = input(f"Invalid ip adress: {host}, please enter a new ip adress or type exit to terminate program:")
             else:
                 break
+            if host.lower() == "exit":
+                    sys.exit("Terminating program as per request.")
         try:
             if flags == None:
                 logging.info(f" Starting scan for host: {host}\n")

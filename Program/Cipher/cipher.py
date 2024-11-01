@@ -23,14 +23,14 @@ class Cipher:
                     cipher_key = key_file.read()
             except FileNotFoundError:
                 logging.error(f"Could not find the specified file: {key}. Please check the filename and try again.")
-                sys.exit(0)
+                
         else:
             try:
                 with open(key, "rb") as key_file:
                     cipher_key = key_file.read()
             except FileNotFoundError:
                 logging.error(f"Could not find the specified file: {key}. Please check the path and try again.")
-                sys.exit(0)
+                
 
     
         cipher_suite = Fernet(cipher_key)
@@ -99,15 +99,19 @@ class Cipher:
             try:
                 with open(self.path / input, "rb") as encrypted_file:
                     encrypted_text = encrypted_file.read()
-                    if not encrypted_text:  # Check if the file is empty
+                    if not encrypted_text: 
                         logging.error(f"The file {input} is empty.")
                         return
                     #validate not none?
             except FileNotFoundError:
                 logging.error(f"Could not find the specified file: {input}. Please check the path and try again.")
                 return
-            else:
+            
+            try:
                 decrypted_text = cipher_suite.decrypt(encrypted_text)
+            except Exception as e:
+                logging.error(f"Decryption failed: {e}")
+                return
             
         else:
             message = input.encode()

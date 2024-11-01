@@ -12,8 +12,12 @@ class Validator:
             ipaddress.ip_address(ip)
             return True
         except ValueError:
-            logging.error(f" Invalid IP adress: {ip}")
-            return False
+            try:
+                ipaddress.ip_network(ip, strict=False)
+                return True
+            except ValueError:
+                logging.error(f"Invalid IP address or CIDR notation: {ip}")
+                return False
 
     @staticmethod
     def validate_path(file_path):

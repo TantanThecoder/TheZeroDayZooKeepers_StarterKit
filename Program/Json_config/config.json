@@ -15,7 +15,6 @@
     "enumeration_port_option": null,
     "enumeration_silent_option": false,
     "enumeration_verbose_option": false,
-    "enumeration_bruteforce_option": false,
     "enumeration_engine_option": null,
 
     "ssh_default_script": "SSH/SSH_Scripts/Example_script.txt",
