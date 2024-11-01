@@ -1,3 +1,0 @@
-echo "Starting process..."
-echo "Proccess working correcrly"
-echo "Process complete!"
