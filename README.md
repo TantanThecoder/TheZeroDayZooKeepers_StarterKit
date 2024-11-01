@@ -134,7 +134,7 @@ The options are as seen below:
    - **Type**: String or null
    - **Description**: Optional parameter to specify ports for enumeration. If set to null, default ports will be used.
 
-10. **enumeration_silent_option**: 
+10. **enumeration_silent_option**:
    - **Type**: Boolean
    - **Description**: When set to `true`, suppresses output during enumeration. Use this option for cleaner logs when running in automated environments.
 
