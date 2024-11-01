@@ -48,7 +48,7 @@ class Cipher:
             - file_name: Output file to save the encrypted content.
             - data_type: Specifies whether input is from a file or terminal input.
         """
-        if data_type == "file" and json_get("cipher_path_default"):
+        if data_type == "file" and json_get.get("cipher_path_default"):
             try:
                 with open( self.path / input, "rb") as text_file:
                     message = text_file.read()
@@ -114,9 +114,15 @@ class Cipher:
                 return
             
         else:
-            message = input.encode()
-            decrypted_text = cipher_suite.decrypt(message)
-            #validate input not none?
+            if isinstance(input, str):
+                message = input.encode()
+            else:
+                message = input
+            try:
+                decrypted_text = cipher_suite.decrypt(message)
+            except Exception as e:
+                logging.error(f"Decryption failed: {e}")
+                return
         
         #validate filename?
         if decrypted_text is not None:
