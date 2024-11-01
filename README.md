@@ -70,8 +70,13 @@ The options are as seen below:
     "default_output_file": "result.txt",
 
     "default_nmap_flags": null,
+    "scanner_path_default": true,
 
     "default_cipher_key_file": "generated_key.key",
+    "cipher_path_default": true,
+    "cipher_path_default_key": true,
+    
+    "logging_level": "INFO",
 
     "enumeration_thread_option": 20,
     "enumeration_port_option": null,
@@ -97,47 +102,63 @@ The options are as seen below:
    - **Type**: String
    - **Description**: The default name of the output file where results from scans and operations will be saved. Change this to specify a different file name if desired.
 
-2. **default_nmap_flags**: 
+2. **scanner_path_default**
+   - **Type**: Boolean
+   - **Description**: While set to `true`, the program will assume all files to be written or read will be saved in the Program/Scanner/Scanner_files folder. Set to `false` if you wanna input the path from current working directory to the file location instead or save an output file in a specific folder.
+
+3. **default_nmap_flags**: 
    - **Type**: String or null
    - **Description**: Default flags for Nmap scans. If you wish to customize the scan behavior (e.g., using specific scan techniques), specify the appropriate Nmap flags here.
 
-3. **default_cipher_key_file**: 
+4. **default_cipher_key_file**: 
    - **Type**: String
    - **Description**: The name of the file where the cipher key will be stored. This is used for encrypting and decrypting sensitive information.
 
-4. **enumeration_thread_option**: 
+5. **cipher_path_default**:
+   - **Type**: Boolean
+   - **Description**: While set to `true`, the program will assume all files used for encrypting or decrypting will be saved in the Program/Cipher/Cipher_files folder. Set to `false` if you wanna input the path from current working directory to the file location instead or if you want to save output files in a specific place.
+
+6. **cipher_path_default_key**:
+   - **Type**: Boolean
+   - **Description**: While set to `true`, the program assumes all keys will exist in the Program/Cipher/Cipher_files folder. Set to `false` if you want to input the path from current working directory to the file location instead. Generated keys always get stored in default path Program/Cipher/Cipher_files.
+
+7. **logging_level**
+   - **Type**: String or null:
+   - **Description**: Set the desired default logging level, choose between: `INFO`, `DEBUG`, `WARNING`, `ERROR`. Default logging level will be set to `INFO` if this option is set to null in the `config.json` file.
+
+8. **enumeration_thread_option**: 
    - **Type**: Integer
    - **Description**: Number of threads to use for concurrent subdomain enumeration. Increasing this number can speed up the enumeration process but may also increase the load on the network.
 
-5. **enumeration_port_option**: 
+9. **enumeration_port_option**: 
    - **Type**: String or null
    - **Description**: Optional parameter to specify ports for enumeration. If set to null, default ports will be used.
 
-6. **enumeration_silent_option**: 
+10. **enumeration_silent_option**: 
    - **Type**: Boolean
    - **Description**: When set to `true`, suppresses output during enumeration. Use this option for cleaner logs when running in automated environments.
 
-7. **enumeration_verbose_option**: 
+11. **enumeration_verbose_option**: 
    - **Type**: Boolean
    - **Description**: When set to `true`, provides verbose output during enumeration, which can be helpful for debugging and monitoring the enumeration process.
 
-8. **enumeration_bruteforce_option**: 
+12. **enumeration_bruteforce_option**: 
    - **Type**: Boolean
    - **Description**: Enables or disables brute force enumeration of subdomains. This can be useful for discovering hidden or unlinked subdomains.
 
-9. **enumeration_engine_option**: 
+13. **enumeration_engine_option**: 
    - **Type**: Array or null
    - **Description**: Specifies which search engines to use for subdomain enumeration. If set to null, the default engines will be used.
 
-10. **ssh_default_script**: 
+14. **ssh_default_script**: 
     - **Type**: String
     - **Description**: Default path to the SSH script file that will be executed when establishing an SSH connection. Users can change this path to point to their own scripts.
 
-11. **ssh_default_local_path**: 
+15. **ssh_default_local_path**: 
     - **Type**: String or null
     - **Description**: The default local path where files will be saved when downloaded via SSH. Set to null if you want to specify the path at runtime.
 
-12. **ssh_default_remote_path**: 
+16. **ssh_default_remote_path**: 
     - **Type**: String or null
     - **Description**: The default remote path from which files will be downloaded via SSH. Set to null if you want to specify the path at runtime.
    
@@ -225,7 +246,8 @@ python run.py enumerate example.com [-o result.txt] [-t 20]
 ### Cryptography Commands
 
 The Cryptography script is initiated by typing 'cipher' or 'keygen' after the ` python run.py ` command depending on which of the 2 you wanna run.
-The cipher module assumes by default that the file to be decryted or encrypted lies in the same folder as the 'cipher.py' file.!
+The cipher module assumes by default that the file to be decryted or encrypted aswell as key files lies in the folder with path: Program/Cipher/Cipher_files, this can be altered with configurations given in chapter 5: [Configuration](#configuration).
+All files stored in Cipher_files are gitignored by default to make sure you dont push them by accident.
 
 #### Command Format cipher
 
@@ -257,6 +279,8 @@ python run.py keygen [-k my_secret_key.key]
 ### Nmap Scanner Commands
 
 The nmap scanning script is initiated by typing 'scanner' after the ` python run.py ` command
+The scanner module assumes by default that the files to be read or the output files gets saved and stored in the folder with path: Program/Scanner/Scanner_files, this can be altered with configurations given in chapter 5: [Configuration](#configuration).
+All files stored in Scanner_files are gitignored by default to make sure you dont push them by accident.
 
 #### Command Format scanner
 
@@ -302,6 +326,7 @@ python run.py ssh script 127.0.0.1 debian test123 [-s my_script.txt] [-l <local_
 
 ### SSH Scripts
 The program contains a folder where you can store your own scripts made specifically for the ssh portion for quick access. However make sure the scripts you make follow the rough guidelines given in the example script that is part of this project, located in the `SSH_Scripts`folder in the `SSH`folder.
+
 ## Logging
 
 The application uses the `logging` module to provide comprehensive logging capabilities, which helps in monitoring and debugging. 
@@ -320,8 +345,9 @@ The following logging levels are used throughout the application:
 - **ERROR**: Due to a more serious problem, the software has not been able to perform a specific operation.
 - **CRITICAL**: A very serious error, indicating that the program itself may be unable to continue running.
 
-### Configuration of Logging
-- **Yet to be impelemented, comming soon!
+### Configuring logging
+
+The default logging level can easily be set in the `config.json` file, see chapter 5: [Configuration](#configuration) for more on this.
 
 ## Contributing
 - ** Guide yet to be implemented **

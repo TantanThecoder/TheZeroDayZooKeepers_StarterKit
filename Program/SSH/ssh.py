@@ -4,7 +4,7 @@ import logging
 from Validator.validator import Validator
 import sys
 
-logging.basicConfig(level=logging.INFO)
+
 class Ssh:
 
     def __init__(self, ssh=None):
@@ -24,7 +24,7 @@ class Ssh:
         """
         while True:
             if not Validator.validate_ip(ip):
-                logging.error(f"Invalid ip adress, double check and try again: {ip}")
+                logging.error(f" Invalid ip adress, double check and try again: {ip}\n")
                 ip = input("Enter the ip adress again:")
             else:
                 break
@@ -43,11 +43,11 @@ class Ssh:
             - None: Simply returns back to continue the next code line if no errors occured.
         """
         if not Validator.validate_path(local_path):
-            logging.error(f"The local path: {local_path} was invalid, please double check the path!")
-            sys.exit("Teminating program due to invalid path!")
+            logging.error(f" The local path: {local_path} was invalid, please double check the path!\n")
+            sys.exit(" Teminating program due to invalid path!\n")
         if not Validator.validate_path(remote_path):
-            logging.error(f"The remote path: {remote_path} was invalid, please double check the path!")
-            sys.exit("Teminating program due to invalid path!")
+            logging.error(f" The remote path: {remote_path} was invalid, please double check the path!\n")
+            sys.exit(" Teminating program due to invalid path!\n")
         return
 
     def ssh_connect(self, ip, user, password):
@@ -59,13 +59,11 @@ class Ssh:
             - user (str): The username to log in to the SSH server.
             - password (str): The password for the chosen username.
         """
-        print("stop4")
         try:
             self.ssh.connect(ip, username=user, password=password)
-            logging.info(f"We have a connection to {user}@{ip}")
-            print(f"We have a connection to {user}@{ip}")
+            logging.info(f" We have a connection to {user}@{ip}\n")
         except paramiko.AuthenticationException:
-            logging.error("Failed to authenticate!")
+            logging.error(" Failed to authenticate!\n")
 
     def ssh_sftp(self, local_path, remote_path, action):
         """
@@ -82,16 +80,16 @@ class Ssh:
 
             if action == "upload":
                 sftp.put(local_path, remote_path)
-                logging.info(f"The file: {local_path} have been uploaded to the remote path: {remote_path}")
+                logging.info(f" The file: {local_path} have been uploaded to the remote path: {remote_path}\n")
             elif action == "download":
                 sftp.get(remote_path, local_path)
-                logging.info(f"The file: {remote_path} have been downloaded to the local path: {local_path}")
+                logging.info(f" The file: {remote_path} have been downloaded to the local path: {local_path}\n")
         except TypeError as e:
-            logging.error(f"Missing a path: {e}")
+            logging.error(f" Missing a path: {e}")
         except PermissionError:
-            logging.error(f"Missing permission to make this action!")
+            logging.error(f" Missing permission to make this action!\n")
         except FileNotFoundError:
-            logging.error(f"No file with that path/name! : {local_path}, or the target path is invalid : {remote_path}. Please check the paths again!")
+            logging.error(f" No file with that path/name! : {local_path}, or the target path is invalid : {remote_path}. Please check the paths again!\n")
         finally:
             sftp.close()
 
@@ -110,9 +108,9 @@ class Ssh:
             with open(script_file, 'r') as file:
                 script = [line.strip() for line in file]
         except FileNotFoundError:
-            logging.error(f"Could not find the specified file: {script_file}. Please check the path and try again.")
+            logging.error(f" Could not find the specified file: {script_file}. Please check the path and try again.\n")
         except Exception as e:
-            logging.error(f"Unexcpected error: {e}")
+            logging.error(f" Unexcpected error: {e}\n")
         return script
 
 
@@ -126,7 +124,6 @@ class Ssh:
             - password: The password for the choosen username.
             - script: The path or name of the file containing the script.
         """
-        print("stop3")
         try:
             self.ssh_connect(ip, user, password)
             formated_script = self.ssh_script_file_unpack(script)
@@ -147,9 +144,9 @@ class Ssh:
                 elif error:
                     logging.error(f"Error: {error}")
         except TypeError:
-            logging.error("Failed to execute script/command since it might be None!")
+            logging.error(" Failed to execute script/command since it might be None!\n")
         except Exception as e:
-            logging.error(f"Unexpected error occured: {e}")
+            logging.error(f" Unexpected error occured: {e}\n")
         finally:
             self.ssh.close()
 
@@ -173,7 +170,7 @@ class Ssh:
             self.ssh_sftp(local_path, remote_path, "upload")
 
         except Exception as e:
-            logging.error(f"Unexcpected error occured: {e}")
+            logging.error(f" Unexcpected error occured: {e}\n")
         finally:
             self.ssh.close()
 
@@ -197,7 +194,7 @@ class Ssh:
             self.ssh_sftp(local_path, remote_path, "download")
 
         except Exception as e:
-            logging.error(f"Unexcpected error occured: {e}")
+            logging.error(f" Unexcpected error occured: {e}\n")
         finally:
             self.ssh.close()
 
@@ -207,16 +204,15 @@ class Ssh:
         valid_ip = self.ssh_validate_ip(ip)
 
         if action == "script":
-            print("stop2")
             self.ssh_script(valid_ip, username, password, script)
         elif action == "upload":
             if not Validator.validate_non_empty(local_path) or not Validator.validate_non_empty(remote_path):
-                logging.warning("Invalid Path, exiting program!")
+                logging.warning(" Invalid Path, exiting program!\n")
                 sys.exit(0)
             self.ssh_upload(valid_ip, username, password, local_path, remote_path)
         elif action == "download":
             if not Validator.validate_non_empty(local_path) or not Validator.validate_non_empty(remote_path):
-                logging.warning("Invalid Path, exiting program!")
+                logging.warning(" Invalid Path, exiting program!\n")
                 sys.exit(0)
             self.ssh_download(valid_ip, username, password, local_path, remote_path)
 

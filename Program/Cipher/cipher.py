@@ -4,13 +4,39 @@ except ImportError:
     logging.error("Cryptography library missing! Please run 'pip install cryptography'")
 import logging
 from pathlib import Path
+from Json_config.json_config import Json_config
+import sys
 
-logging.basicConfig(level=logging.INFO)
+json_config = Json_config()
+json_get = json_config.load_config()
+
 
 class Cipher:
     def __init__(self):
         self.path = Path.cwd() / "Cipher" / "Cipher_files"
         pass
+
+    def get_key(self, key):
+        if json_get.get("cipher_path_default_key"):
+            try:
+                with open(self.path / key, "rb") as key_file:
+                    cipher_key = key_file.read()
+            except FileNotFoundError:
+                logging.error(f"Could not find the specified file: {key}. Please check the filename and try again.")
+                sys.exit(0)
+        else:
+            try:
+                with open(key, "rb") as key_file:
+                    cipher_key = key_file.read()
+            except FileNotFoundError:
+                logging.error(f"Could not find the specified file: {key}. Please check the path and try again.")
+                sys.exit(0)
+
+    
+        cipher_suite = Fernet(cipher_key)
+        return cipher_suite
+        
+
 
     def Encrypt(self, cipher_suite, input, file_name, data_type):
         """
@@ -22,9 +48,20 @@ class Cipher:
             - file_name: Output file to save the encrypted content.
             - data_type: Specifies whether input is from a file or terminal input.
         """
-        if data_type == "file":
+        if data_type == "file" and json_get("cipher_path_default"):
             try:
                 with open( self.path / input, "rb") as text_file:
+                    message = text_file.read()
+                    cipher_text = cipher_suite.encrypt(message)
+                    #validate message or cipher text == none
+            except FileNotFoundError:
+                logging.error(f"Could not find the specified file: {input}. Please check the path and try again.")
+            else:
+                logging.info("File has been read!")
+
+        elif data_type == "file" and not json_get("cipher_path_default"):
+            try:
+                with open(input, "rb") as text_file:
                     message = text_file.read()
                     cipher_text = cipher_suite.encrypt(message)
                     #validate message or cipher text == none
@@ -94,13 +131,7 @@ class Cipher:
             - file_name: Name of the file to store output in.
             - key: The cryptographic key used for encryption/decryption.
         """
-        try:
-            with open(self.path / key, "rb") as key_file:
-                cipher_key = key_file.read()
-        except FileNotFoundError:
-            logging.error(f"Could not find the specified file: {key}. Please check the path and try again.")
-        else:
-            cipher_suite = Fernet(cipher_key)
+        cipher_suite = self.get_key(key)
 
         if action == "decrypt":
             self.Decrypt(cipher_suite, input, file_name, data_type)

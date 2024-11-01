@@ -4,14 +4,19 @@ except ImportError:
     logging.error("Nmap library is not installed! Please run 'pip install python-nmap'.")
 import json
 import logging
-import sys
+from pathlib import Path
 from Validator.validator import Validator
+from Json_config.json_config import Json_config
 
-logging.basicConfig(level=logging.INFO)
+json_config = Json_config()
+json_get = json_config.load_config()
+
+
 
 class Scanner:
     def __init__(self, port_scanner=None):
         self.scanner = port_scanner if port_scanner else nmap.PortScanner()
+        self.path = Path.cwd() / "Scanner" / "Scanner_files"
 
 
     def write_file(self, formated_result, output_file):
@@ -22,15 +27,26 @@ class Scanner:
             - formated_result: The returned value from fuction format_scan(), formated for better readability
             - output_file: Name of the file the function write formated_result to.
         """
-        try:
-            with open(output_file, 'a') as file:
-                file.write(formated_result)
-        except FileNotFoundError:
-            logging.error(f"Could not find the specified file: {output_file}. Please check the path and try again.")
-        except PermissionError as e:
-            logging.error(f"Permission denied: {e}")
-        except Exception as e:
-            logging.error(f"An error occured, {e}")
+        if json_get.get("scanner_path_default"):
+            try:
+                with open(self.path / output_file, 'a') as file:
+                    file.write(formated_result)
+            except FileNotFoundError:
+                logging.error(f" Could not find the specified file: {output_file}. Please check the path and try again.\n")
+            except PermissionError as e:
+                logging.error(f" Permission denied: {e}\n")
+            except Exception as e:
+                logging.error(f" An error occured, {e}\n")
+        else: 
+            try:
+                with open(output_file, 'a') as file:
+                    file.write(formated_result)
+            except FileNotFoundError:
+                logging.error(f" Could not find the specified file: {output_file}. Please check the path and try again.\n")
+            except PermissionError as e:
+                logging.error(f" Permission denied: {e}\n")
+            except Exception as e:
+                logging.error(f" An error occured, {e}\n")
 
     def format_scan(self, output):
         """
@@ -52,17 +68,30 @@ class Scanner:
          Args:
             - file_name: Name of the file containing the desired ip adresses
         """
-        logging.info(f"\n Reading file: {file_name}\n")
-        try:
-            with open(file_name, 'r') as file:
-                hosts = [line.strip() for line in file.readlines()]
-                return hosts
-        except FileNotFoundError:
-            logging.error(f"Could not find the specified file: {file_name}. Please check the path and try again.")
-        except PermissionError as e:
-            logging.error(f"Permission denied: {e}")
-        except Exception as e:
-            logging.error(f"Unexpected error: {e}")
+        if json_get.get("scanner_path_default"):
+            try:
+                logging.info(f" Reading file: {file_name}\n")
+                with open(self.path / file_name, 'r') as file:
+                    hosts = [line.strip() for line in file.readlines()]
+                    return hosts
+            except FileNotFoundError:
+                logging.error(f" Could not find the specified file: {file_name}. Please check the path and try again.\n")
+            except PermissionError as e:
+                logging.error(f" Permission denied: {e}\n")
+            except Exception as e:
+                logging.error(f" Unexpected error: {e}\n")
+        else: 
+            try:
+                logging.info(f" Reading file: {file_name}\n")
+                with open(file_name, 'r') as file:
+                    hosts = [line.strip() for line in file.readlines()]
+                    return hosts
+            except FileNotFoundError:
+                logging.error(f" Could not find the specified file: {file_name}. Please check the path and try again.\n")
+            except PermissionError as e:
+                logging.error(f" Permission denied: {e}\n")
+            except Exception as e:
+                logging.error(f" Unexpected error: {e}\n")
 
 
     def Scan_file(self, file_name, output_file, flags=None):
@@ -74,34 +103,30 @@ class Scanner:
             - output_file: File to store scan results.
             - flags: Optional Nmap flags for advanced scanning options.
         """
-        logging.info("Scanning...")
         hosts = self.read_file(file_name)
         for host in hosts:
             if not Validator.validate_ip(host):
-                logging.warning(f"Invalid IP adress: {host}, skipping scan and continuing to next host!")
-                print((f"Invalid IP adress: {host}, skipping scan and continuing to next host!"))
+                logging.warning(f"Invalid IP adress: {host}, skipping scan and continuing to next host!\n")
                 continue
             try:
                 if flags == None:
-                    logging.info(f"Started scan for host: {host}")
-                    print(f"Starting scan for host: {host}, with flags: {flags}")
+                    logging.info(f" Started scan for host: {host}\n")
                     self.scanner.scan(host) 
                 else:
-                    logging.info(f"Starting scan for host: {host}, with flags: {flags}")
-                    print(f"Starting scan for host: {host}, with flags: {flags}")
+                    logging.info(f"Starting scan for host: {host}, with flags: {flags}\n")
                     self.scanner.scan(host, arguments=flags)
             except nmap.PortScannerError as e:
-                logging.error(f"An Nmap error occured: {e}")
+                logging.error(f" An Nmap error occured: {e}\n")
             except Exception as e:
-                logging.error(f"An error occurred! {e}")
+                logging.error(f" An error occurred! {e}\n")
             else:
-                logging.info(f"Scan for host: {host}, sucessful!")
+                logging.info(f" Scan for host: {host}, sucessful!\n")
 
             output = self.scanner[host]
             formated_result = self.format_scan(output)
             self.write_file(formated_result, output_file)
 
-        logging.info(f"A file has been created with the given name: {output_file}")
+        logging.info(f" A file has been created with the given name: {output_file}")
 
     def Scan_terminal(self, host, output_file, flags):
         """
@@ -112,7 +137,7 @@ class Scanner:
             - output_file: File to store scan results.
             - flags: Optional Nmap flags for advanced scanning options.
         """
-        logging.info("Scanning...")
+        
         while True:
             if not Validator.validate_ip(host):
                 host = input(f"Invalid ip adress: {host}, please enter a new ip adress:")
@@ -120,19 +145,19 @@ class Scanner:
                 break
         try:
             if flags == None:
-                logging.info(f"Starting scan for host: {host}")
+                logging.info(f" Starting scan for host: {host}\n")
                 self.scanner.scan(host)
             else:
-                logging.info(f"Starting scan for host: {host}, with flags: {flags}")
+                logging.info(f" Starting scan for host: {host}, with flags: {flags}\n")
                 self.scanner.scan(host, arguments=flags)
         except Exception as e:
-            logging.error(f"An error occurred! {e}")
+            logging.error(f" An error occurred! {e}\n")
 
         output = self.scanner[host]
         formated_result = self.format_scan(output)
         self.write_file(formated_result, output_file)
         
-        logging.info(f"A file has been created with the given name: {output_file}")    
+        logging.info(f" A file has been created with the given name: {output_file}")    
 
     def Main(self, action, input, output_file, flags=None):
         if action == "file":

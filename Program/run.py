@@ -12,10 +12,9 @@ import sys
 
 VERSION = "Alpha 0.9.5"
 
-logging.basicConfig(level=logging.INFO)
-
 json_config = Json_config()
 json_get = json_config.load_config()
+json_config.configure_logging()
 
 if not json_get:
     logging.error("Configuration file 'config.json' is missing or invalid. Please create it with default settings or check github for correct file!")
@@ -60,32 +59,28 @@ parser_ssh.add_argument("-r", "--remote_path", help= "The path on the SSH server
 args = parser.parse_args()
 
 def Main():
-    print(f"Arguments parsed: {args}")
-    print(f"Script selected: {args.script}")
+    logging.info(f" Script selected: {args.script}\n")
 
     if args.script == "scanner":
-        logging.info("Starting scanner.")
+        logging.info(" Booting up scanner.\n")
         scanner = Scanner()
         scanner.Main(args.action, args.input, args.output_file, args.flags)
     elif args.script == "ssh":
-        print("stop1")
-        logging.info("Ssh machine setting up.")
+        logging.info(" Ssh machine setting up.\n")
         ssh = Ssh()
-        ssh.Main(args.action, args.ip, args.username, args.password, args.script, args.local_path, args.remote_path)
+        ssh.Main(args.action, args.ip, args.username, args.password, args.script_file, args.local_path, args.remote_path)
     elif args.script == "keygen":
-        logging.info("Starting the key generator.")
+        logging.info(" Starting the key generator.\n")
         keygen = Keygen()
         keygen.Main(args.key_file)
     elif args.script == "cipher":
-        logging.info("Starting Cipher engines.")
+        logging.info(" Starting Cipher engines.\n")
         cipher = Cipher()
         cipher.Main(args.action, args.data_type, args.input, args.output_file, args.key)
     elif args.script == "enumerate":
-        logging.info("Enuerator online")
+        logging.info(" Enuerator online\n")
         enumeration = Enumeration()
         enumeration.Main(args.domain, args.thread, args.output_file)
-    print("skipped")
-    
 
 
 if __name__ == "__main__":

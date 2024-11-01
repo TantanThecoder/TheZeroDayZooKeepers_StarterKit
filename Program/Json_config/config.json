@@ -3,8 +3,13 @@
     "default_output_file": "result.txt",
 
     "default_nmap_flags": null,
+    "scanner_path_default": true,
 
     "default_cipher_key_file": "generated_key.key",
+    "cipher_path_default": true,
+    "cipher_path_default_key": true,
+    
+    "logging_level": "INFO",
 
     "enumeration_thread_option": 20,
     "enumeration_port_option": null,

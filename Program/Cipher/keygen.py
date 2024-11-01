@@ -5,8 +5,6 @@ except ImportError:
 from pathlib import Path
 import logging
 
-logging.basicConfig(level=logging.INFO)
-
 
 class Keygen:
     def __init__(self):

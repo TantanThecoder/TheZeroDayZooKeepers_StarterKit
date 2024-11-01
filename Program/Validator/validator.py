@@ -12,7 +12,7 @@ class Validator:
             ipaddress.ip_address(ip)
             return True
         except ValueError:
-            logging.error(f"Invalid IP adress: {ip}")
+            logging.error(f" Invalid IP adress: {ip}")
             return False
 
     @staticmethod
@@ -20,7 +20,7 @@ class Validator:
         """Check that a given file path exists and is a valid path."""
         if Path(file_path).exists():
             return True
-        logging.error(f"Invalid or non-existent file path: {file_path}")
+        logging.error(f" Invalid or non-existent file path: {file_path}")
         return False
 
     @staticmethod
@@ -28,7 +28,7 @@ class Validator:
         """Generic non-empty check."""
         if value:
             return True
-        logging.error(f"{name} cannot be empty.")
+        logging.error(f" {name} cannot be empty.")
         return False
 
     @staticmethod

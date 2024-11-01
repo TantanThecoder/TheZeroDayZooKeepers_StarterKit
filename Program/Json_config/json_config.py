@@ -2,7 +2,6 @@ import logging
 import json
 from pathlib import Path
 
-logging.basicConfig(level=logging.INFO)
 
 class Json_config:
 
@@ -37,3 +36,14 @@ class Json_config:
         if raw_path == None:
             return None
         return Path(raw_path)
+    
+    def configure_logging(self):
+        """
+        Configures the logging level based on the configuration file.
+        """
+        if self.config:
+            log_level = self.config.get("level", "INFO").upper()
+            logging.getLogger().setLevel(getattr(logging, log_level, logging.INFO))
+            logging.info(f"Logging configured to level: {log_level}")
+        else:
+            logging.warning("Using default logging level (INFO) due to missing or invalid configuration.")
