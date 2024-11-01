@@ -3,6 +3,9 @@ Program/__pycache__/Scanner.cpython-313.pyc
 Program/__pycache__/Keygen.cpython-313.pyc
 Program/__pycache__/
 __pycache__
+Program/Cipher/Cipher_files/*
+Program/Scanner/Scanner_files/*
+Program/SSH/SSH_Scripts/*
 
 Program/Scanner/__pycache__/scanner.cpython-311.pyc
 venv
