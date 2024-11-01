@@ -135,20 +135,20 @@ The options are as seen below:
    - **Description**: Optional parameter to specify ports for enumeration. If set to null, default ports will be used.
 
 10. **enumeration_silent_option**:
-   - **Type**: Boolean
-   - **Description**: When set to `true`, suppresses output during enumeration. Use this option for cleaner logs when running in automated environments.
+    - **Type**: Boolean
+    - **Description**: When set to `true`, suppresses output during enumeration. Use this option for cleaner logs when running in automated environments.
 
 11. **enumeration_verbose_option**: 
-   - **Type**: Boolean
-   - **Description**: When set to `true`, provides verbose output during enumeration, which can be helpful for debugging and monitoring the enumeration process.
+    - **Type**: Boolean
+    - **Description**: When set to `true`, provides verbose output during enumeration, which can be helpful for debugging and monitoring the enumeration process.
 
 12. **enumeration_bruteforce_option**: 
-   - **Type**: Boolean
-   - **Description**: Enables or disables brute force enumeration of subdomains. This can be useful for discovering hidden or unlinked subdomains.
+    - **Type**: Boolean
+    - **Description**: Enables or disables brute force enumeration of subdomains. This can be useful for discovering hidden or unlinked subdomains.
 
 13. **enumeration_engine_option**: 
-   - **Type**: Array or null
-   - **Description**: Specifies which search engines to use for subdomain enumeration. If set to null, the default engines will be used.
+    - **Type**: Array or null
+    - **Description**: Specifies which search engines to use for subdomain enumeration. If set to null, the default engines will be used.
 
 14. **ssh_default_script**: 
     - **Type**: String
