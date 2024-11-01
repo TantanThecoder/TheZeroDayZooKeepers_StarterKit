@@ -1,0 +1,4 @@
+echo "Starting Proccess"
+echo "Proccess under way"
+
+echo "Proccess finished"
