@@ -42,7 +42,7 @@ class Json_config:
         Configures the logging level based on the configuration file.
         """
         if self.config:
-            log_level = self.config.get("level", "INFO").upper()
+            log_level = self.config.get("logging_level", "INFO").upper()
             logging.getLogger().setLevel(getattr(logging, log_level, logging.INFO))
             logging.info(f"Logging configured to level: {log_level}")
         else:

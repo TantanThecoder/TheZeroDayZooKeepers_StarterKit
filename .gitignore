@@ -9,3 +9,5 @@ Program/SSH/SSH_Scripts/*
 
 Program/Scanner/__pycache__/scanner.cpython-311.pyc
 venv
+.DS_Store
+MvMon.txt
