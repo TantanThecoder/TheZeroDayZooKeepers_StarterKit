@@ -81,7 +81,7 @@ def Main():
         logging.info(" Enuerator online\n")
         enumeration = Enumeration()
         enumeration.Main(args.domain, args.thread, args.output_file)
-
+        print("hello")
 
 if __name__ == "__main__":
     Main()
